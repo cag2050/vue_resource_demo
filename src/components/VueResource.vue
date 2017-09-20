@@ -18,12 +18,15 @@ export default {
     },
     mounted () {
         this.$http
+            // 可以设置过期时间为100ms，来模拟超时
+            // .get(this.url, { timeout: 100 })
             .get(this.url)
             .then((response) => {
                 console.log(response)
                 this.status = response.status
                 this.statusText = response.statusText
             })
+            // 网络错误、url地址错误、请求超时，能被catch捕获
             .catch((error) => {
                 console.log(error)
                 this.status = error.status
